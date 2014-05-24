@@ -1,0 +1,4 @@
+require_relative '../lib/intelligence'
+include Intelligence
+
+Intelligence.test
