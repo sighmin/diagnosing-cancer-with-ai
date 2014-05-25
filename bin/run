@@ -4,10 +4,9 @@ require_relative '../lib/intelligence'
 include Intelligence
 
 simulator = Sims::Simulator.new do
-  algorithm :ga
-  problem :minimization
+  simulation type: :simulation, runs: 1
+  algorithm  type: :pso, iterations: 500, population: 50, dimensions: 5
+  problem    type: :problem, objective: :minimization
 end
 
-puts "Simulator constructed:".blue
-puts simulator.algorithm
-puts simulator.problem
+simulator.run
