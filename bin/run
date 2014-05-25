@@ -1,4 +1,13 @@
+#!/usr/bin/env ruby
+
 require_relative '../lib/intelligence'
 include Intelligence
 
-Intelligence.test
+simulator = Sims::Simulator.new do
+  algorithm :ga
+  problem :minimization
+end
+
+puts "Simulator constructed:".blue
+puts simulator.algorithm
+puts simulator.problem
