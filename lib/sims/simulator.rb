@@ -21,15 +21,19 @@ class Intelligence::Sims::Simulator
     start()
     @algorithm.iterations.times do |i|
       @solutions << @algorithm.iterate(i)
-      if i % 50 == 0
-        puts "# #{i} => #{@algorithm.best_fitness}"
-      end
+      update(i)
     end
     report()
   end
 
+  def update i
+    if i % @simulation[:resolution] == 0
+      puts "# #{i} => #{@algorithm.best_fitness}"
+    end
+  end
+
   def start
-    puts '*** '.magenta + 'Simulator starting...'.blue
+    puts '*** '.magenta + 'Simulator starting'.blue
   end
 
   def report
@@ -45,6 +49,6 @@ class Intelligence::Sims::Simulator
 private
 
   def default_simulation
-    { runs: 30 }
+    { runs: 30, resolution: 50 }
   end
 end
