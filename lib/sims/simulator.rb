@@ -38,7 +38,7 @@ class Intelligence::Sims::Simulator
 
   def report
     puts '*** '.magenta + 'Simulator complete'.blue
-    puts 'Solution: ' + @algorithm.best_solution.to_s.green
+    puts 'Solution: ' + @algorithm.best_solution.position.to_s.green
     puts 'Fitness:  ' + @algorithm.best_fitness.to_s.green
   end
 

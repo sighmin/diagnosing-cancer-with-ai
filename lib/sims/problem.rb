@@ -8,9 +8,9 @@ class Intelligence::Sims::Problem
   def fitness solution
     # Test fitness
     distances = []
-    solution.each do |i|
+    solution.each_index do |i|
       distances << (1.0 - solution[i]).abs
     end
-    solution.length.to_f - distances.reduce(:+)
+    distances.reduce(:+)
   end
 end

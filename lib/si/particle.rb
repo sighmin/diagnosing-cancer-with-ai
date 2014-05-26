@@ -1,5 +1,5 @@
 class Intelligence::Si::Particle
-  attr_accessor :algorithm, :pbest, :w, :c1, :c2, :position, :velocity
+  attr_accessor :algorithm, :pbest, :w, :c1, :c2, :position, :velocity, :fitness
 
   def initialize options
     @algorithm = options[:algorithm]
@@ -26,8 +26,8 @@ class Intelligence::Si::Particle
   def update_velocity
     r1, r2 = rand(), rand()
     adjusted_velocity  = Intelligence::Math::VectorMath.mult_scalar(@w, @velocity)
-    adjusted_social    = Intelligence::Math::VectorMath.mult_scalar(r1 * @c1, Intelligence::Math::VectorMath.minus(@pbest, @position))
-    adjusted_cognitive = Intelligence::Math::VectorMath.mult_scalar(r2 * @c2, Intelligence::Math::VectorMath.minus(@pbest, @position))
+    adjusted_cognitive = Intelligence::Math::VectorMath.mult_scalar(r1 * @c1, Intelligence::Math::VectorMath.minus(@pbest, @position))
+    adjusted_social    = Intelligence::Math::VectorMath.mult_scalar(r2 * @c2, Intelligence::Math::VectorMath.minus(algorithm.best_solution.position, @position))
 
     @velocity = Intelligence::Math::VectorMath.add(adjusted_velocity, Intelligence::Math::VectorMath.add(adjusted_social, adjusted_cognitive))
   end
@@ -43,6 +43,10 @@ class Intelligence::Si::Particle
   end
 
   def <=> other
-    algorithm.problem.fitness(@position) <=> algorithm.problem.fitness(other.position)
+    @fitness <=> other.fitness
+  end
+
+  def calc_fitness
+    @fitness = @algorithm.problem.fitness(@position)
   end
 end

@@ -15,7 +15,7 @@ class Intelligence::Algo::Pso < Intelligence::Algo::Algorithm
       algorithm: self
     }
     @swarm = initialize_swarm(@population, particle_options)
-    @best_solution = @swarm.sample.position.dup
+    @best_solution = @swarm.sample.dup
   end
 
   def initialize_swarm population, particle_options
@@ -29,14 +29,15 @@ class Intelligence::Algo::Pso < Intelligence::Algo::Algorithm
       particle.update_velocity
       particle.update_position
       particle.update_pbest
-      update_gbest
+      update_gbest particle
     end
   end
 
-  def update_gbest
-    candidate = @swarm.sort.first.dup
-    if @problem.fitness(candidate.position) < @problem.fitness(@best_solution)
-      @best_solution = candidate.position
+  def update_gbest candidate
+    @swarm.each{ |particle| particle.calc_fitness }
+    @best_solution.calc_fitness
+    if candidate.fitness < @best_solution.fitness
+      @best_solution = candidate.dup
     end
   end
 end

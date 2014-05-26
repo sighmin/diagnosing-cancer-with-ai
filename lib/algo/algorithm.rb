@@ -10,6 +10,6 @@ class Intelligence::Algo::Algorithm
   end
 
   def best_fitness
-    @problem.fitness(@best_solution)
+    @problem.fitness(@best_solution.position)
   end
 end
