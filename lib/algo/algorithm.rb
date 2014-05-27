@@ -5,11 +5,19 @@ class Intelligence::Algo::Algorithm
     fail "not implemented yet".red
   end
 
-  def iterate
+  def iterate i
     fail "not implemented yet".red
   end
 
   def best_fitness
-    @problem.fitness(@best_solution.position)
+    fail "not implemented yet".red
+  end
+
+  def best_fitness_to_print
+    fail "not implemented yet".red
+  end
+
+  def best_solution_to_print
+    fail "not implemented yet".red
   end
 end

@@ -1,4 +1,4 @@
-class Intelligence::Si::Particle
+class Intelligence::Si::Particle < Intelligence::Algo::Entity
   attr_accessor :algorithm, :pbest, :w, :c1, :c2, :position, :velocity, :fitness
 
   def initialize options
@@ -7,7 +7,6 @@ class Intelligence::Si::Particle
     @c1 = options[:c1]
     @c2 = options[:c2]
     @dimensions = options[:dimensions]
-    @algorithm = options[:algorithm]
     init
   end
 

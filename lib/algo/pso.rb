@@ -40,4 +40,16 @@ class Intelligence::Algo::Pso < Intelligence::Algo::Algorithm
       @best_solution = candidate.dup
     end
   end
+
+  def best_fitness
+    @problem.fitness(@best_solution.position)
+  end
+
+  def best_fitness_to_print
+    best_fitness.to_s
+  end
+
+  def best_solution_to_print
+    @best_solution.position.to_s
+  end
 end
