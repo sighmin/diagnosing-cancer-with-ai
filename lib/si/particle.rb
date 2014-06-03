@@ -7,6 +7,8 @@ class Intelligence::Si::Particle < Intelligence::Algo::Entity
     @c1 = options[:c1]
     @c2 = options[:c2]
     @dimensions = options[:dimensions]
+    @domain = options[:domain]
+    @vdomain = options[:vdomain]
     init
   end
 
@@ -15,10 +17,10 @@ class Intelligence::Si::Particle < Intelligence::Algo::Entity
     @pbest = []
     @velocity = []
     @dimensions.times do |d|
-      pos = rand(-1.0..1.0)
+      pos = rand(@domain)
       @position << pos
       @pbest << pos
-      @velocity << rand(-0.1..0.1)
+      @velocity << rand(@vdomain)
     end
   end
 

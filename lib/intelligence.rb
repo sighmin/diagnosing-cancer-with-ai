@@ -2,6 +2,7 @@ require 'intelligence/version'
 require 'pry'
 require 'colorize'
 require 'active_support/all'
+require 'pstore'
 
 module Utils
   def self.relative_path file
@@ -15,18 +16,25 @@ module Intelligence
     autoload :SimulatorConfig,         Utils.relative_path('sims/simulator_config')
     autoload :Simulation,              Utils.relative_path('sims/simulation')
     autoload :Solution,                Utils.relative_path('sims/solution')
-    autoload :Problem,                 Utils.relative_path('sims/problem')
-    autoload :HelloWorldProblem,       Utils.relative_path('sims/hello_world_problem')
+    module Problems
+      autoload :Problem,               Utils.relative_path('sims/problems/problem')
+      autoload :OnesProblem,           Utils.relative_path('sims/problems/ones_problem')
+      autoload :HelloWorldProblem,     Utils.relative_path('sims/problems/hello_world_problem')
+      autoload :NnTrainingProblem,     Utils.relative_path('sims/problems/nn_training_problem')
+    end
   end
+
   module Algo
     autoload :Algorithm,               Utils.relative_path('algo/algorithm')
     autoload :Entity,                  Utils.relative_path('algo/entity')
     autoload :Pso,                     Utils.relative_path('algo/pso')
     autoload :Ga,                      Utils.relative_path('algo/ga')
   end
+
   module Si
     autoload :Particle,                Utils.relative_path('si/particle')
   end
+
   module Ec
     autoload :Individual,              Utils.relative_path('ec/individual')
     autoload :MutationStrategy,        Utils.relative_path('ec/mutation_strategy')
@@ -36,8 +44,28 @@ module Intelligence
     autoload :RankSelectionStrategy,   Utils.relative_path('ec/rank_selection_strategy')
     autoload :RandomSelectionStrategy, Utils.relative_path('ec/random_selection_strategy')
   end
+
+  module Nn
+    autoload :NeuralNetwork,           Utils.relative_path('nn/neural_network')
+    autoload :ArchitectureBuilder,     Utils.relative_path('nn/architecture_builder')
+    autoload :Dataset,                 Utils.relative_path('nn/dataset')
+    module Component
+      autoload :Layer,                 Utils.relative_path('nn/component/layer')
+      autoload :Neuron,                Utils.relative_path('nn/component/neuron')
+      autoload :BiasNeuron,            Utils.relative_path('nn/component/bias_neuron')
+    end
+  end
+
   module Math
     autoload :VectorMath,              Utils.relative_path('math/vector_math')
+    module Functions
+      module Activation
+        autoload :ActivationFunction,  Utils.relative_path('math/functions/activation/activation_function')
+        autoload :Sigmoid,             Utils.relative_path('math/functions/activation/sigmoid')
+        autoload :TanH,                Utils.relative_path('math/functions/activation/tan_h')
+        autoload :Linear,              Utils.relative_path('math/functions/activation/linear')
+      end
+    end
   end
 
   class << self

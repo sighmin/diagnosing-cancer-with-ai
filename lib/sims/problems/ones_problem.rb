@@ -1,9 +1,4 @@
-class Intelligence::Sims::Problem
-  attr_accessor :objective
-
-  def initialize options
-    @objective = options[:objective] || :minimization
-  end
+class Intelligence::Sims::Problems::OnesProblem < Intelligence::Sims::Problems::Problem
 
   def fitness solution
     # Test fitness
@@ -13,4 +8,5 @@ class Intelligence::Sims::Problem
     end
     distances.reduce(:+)
   end
+
 end

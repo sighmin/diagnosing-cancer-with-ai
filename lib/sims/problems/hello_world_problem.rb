@@ -1,4 +1,4 @@
-class Intelligence::Sims::HelloWorldProblem < Intelligence::Sims::Problem
+class Intelligence::Sims::Problems::HelloWorldProblem < Intelligence::Sims::Problems::Problem
   ALPHA = ('a'..'z').to_a + [" "]
 
   def fitness solution
@@ -9,6 +9,14 @@ class Intelligence::Sims::HelloWorldProblem < Intelligence::Sims::Problem
     end
   end
 
+  def mutate_gene gene_index
+    index = ALPHA.index(gene_index)
+    index += rand() < 0.5 ? 1 : -1
+    ALPHA[index % ALPHA.length].dup
+  end
+
+private
+
   def char_distance ai, bi
     ia = ALPHA.index(ai)
     ib = ALPHA.index(bi)
@@ -17,12 +25,6 @@ class Intelligence::Sims::HelloWorldProblem < Intelligence::Sims::Problem
     backward = (diff - ALPHA.length).abs
     distance = forward < backward ? forward : backward
     distance
-  end
-
-  def mutate_gene gene_index
-    index = ALPHA.index(gene_index)
-    index += rand() < 0.5 ? 1 : -1
-    ALPHA[index % ALPHA.length].dup
   end
 
 end

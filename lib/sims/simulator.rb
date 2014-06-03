@@ -11,10 +11,10 @@ class Intelligence::Sims::Simulator
   end
 
   def init config
-    @problem   = config[:problem]   || Intelligence::Sims::Problem.new
+    @problem   = config[:problem]   || Intelligence::Sims::Problems::OnesProblem.new
     @algorithm = config[:algorithm] || Intelligence::Algo::Pso.new
     @algorithm.problem = @problem
-    @simulation = default_simulation.merge(config[:simulation] || {})
+    @simulation = config[:simulation] || Intelligence::Sims::Simulation.new
   end
 
   def run
@@ -44,11 +44,5 @@ class Intelligence::Sims::Simulator
 
   def best_solution
     @algorithm.best_solution
-  end
-
-private
-
-  def default_simulation
-    { runs: 30, resolution: 50 }
   end
 end

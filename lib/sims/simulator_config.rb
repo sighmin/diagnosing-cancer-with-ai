@@ -6,9 +6,11 @@ class Intelligence::Sims::SimulatorConfig < Hash
     namespace = "Intelligence::"
     ["#{namespace}#{type.to_s.camelize}",
       "#{namespace}Sims::#{type.to_s.camelize}",
+      "#{namespace}Sims::Problems::#{type.to_s.camelize}",
       "#{namespace}Algo::#{type.to_s.camelize}",
       "#{namespace}Pso::#{type.to_s.camelize}",
-      "#{namespace}Ec::#{type.to_s.camelize}"
+      "#{namespace}Ec::#{type.to_s.camelize}",
+      "#{namespace}Nn::#{type.to_s.camelize}",
     ].each do |klass|
       begin
         return Object.const_get klass

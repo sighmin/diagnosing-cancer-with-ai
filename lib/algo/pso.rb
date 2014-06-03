@@ -7,11 +7,15 @@ class Intelligence::Algo::Pso < Intelligence::Algo::Algorithm
     @c2 = options[:c2] || 1.496180
     @dimensions = options[:dimensions] || 5
     @population = options[:population] || 30
+    @domain = options[:domain] || (-0.5..0.5)
+    @vdomain = options[:vdomain] || (-0.5..0.5)
     particle_options = {
       w: @w,
       c1: @c1,
       c2: @c2,
       dimensions: @dimensions,
+      domain: @domain,
+      vdomain: @vdomain,
       algorithm: self
     }
     @swarm = initialize_swarm(@population, particle_options)

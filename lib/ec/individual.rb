@@ -10,7 +10,7 @@ class Intelligence::Ec::Individual < Intelligence::Algo::Entity
   def init
     @chromosome = []
     @dimensions.times do |d|
-      @chromosome << Intelligence::Sims::HelloWorldProblem::ALPHA.sample
+      @chromosome << Intelligence::Sims::Problems::HelloWorldProblem::ALPHA.sample
     end
   end
 
