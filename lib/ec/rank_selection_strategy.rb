@@ -20,6 +20,8 @@ class Intelligence::Ec::RankSelectionStrategy < Intelligence::Ec::SelectionStrat
     selected
   end
 
+private
+
   def calc_normalized_ranks entities
     # Rank by fitness
     fitnesses = entities.map{ |e| e.fitness }

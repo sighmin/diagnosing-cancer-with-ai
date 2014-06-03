@@ -5,8 +5,8 @@ include Intelligence
 
 simulator = Sims::Simulator.new do
   simulation type: :simulation, runs: 1
-  algorithm  type: :ga, iterations: 1000, population: 50, dimensions: 11,
-             mutation_rate: 0.8, crossover_rate: 0.5,
+  algorithm  type: :ga, iterations: 1500, population: 50, dimensions: 11,
+             mutation_rate: 0.3, crossover_rate: 0.5,
              selection_strategy: :rank_selection_strategy
   problem    type: :hello_world_problem, objective: :minimization
 end

@@ -5,7 +5,7 @@ include Intelligence
 
 simulator = Sims::Simulator.new do
   simulation type: :simulation, runs: 1, resolution: 50
-  algorithm  type: :pso, iterations: 500, population: 50, dimensions: 5, domain: -0.9..0.9, vdomain: -1.0..1.0
+  algorithm  type: :pso, iterations: 1000, population: 50, dimensions: 5, domain: (-0.9..0.9), vdomain: (-1.0..1.0)
   problem    type: :ones_problem, objective: :minimization
 end
 
