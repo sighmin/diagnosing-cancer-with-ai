@@ -4,9 +4,9 @@ require_relative '../lib/intelligence'
 include Intelligence
 
 
-simulator = Sims::Simulator.new do
+simulator = Sims::NnSimulator.new do
   simulation type: :simulation, runs: 1, resolution: 1
-  algorithm  type: :pso, iterations: 100, population: 15, dimensions: 225, domain: (-0.5..0.5), vdomain: (-0.7..0.7)
+  algorithm  type: :pso, iterations: 50, population: 20, dimensions: 225, domain: (-0.5..0.5), vdomain: (-0.7..0.7)
   problem    type: :nn_training_problem,
     objective: :minimization,
     dataset: {
@@ -28,7 +28,7 @@ simulator = Sims::Simulator.new do
         function: :sigmoid
       }]
     },
-    precision: 0.25
+    precision: 0.2
 end
 
 simulator.run

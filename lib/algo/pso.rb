@@ -45,15 +45,27 @@ class Intelligence::Algo::Pso < Intelligence::Algo::Algorithm
     end
   end
 
-  def best_fitness
-    @problem.fitness(@best_solution.position)
-  end
-
   def best_fitness_to_print
     best_fitness.to_s
   end
 
   def best_solution_to_print
     @best_solution.position.to_s
+  end
+
+  def best_fitness
+    @problem.fitness(@best_solution.position)
+  end
+
+  def best_generalization
+    @problem.generalization(@best_solution.position)
+  end
+
+  def best_classification
+    @problem.classification(@best_solution.position)
+  end
+
+  def measurements
+    [ best_fitness, best_generalization, best_classification ]
   end
 end

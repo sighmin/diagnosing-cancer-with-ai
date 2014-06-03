@@ -9,19 +9,47 @@ class Intelligence::Sims::Problems::NnTrainingProblem < Intelligence::Sims::Prob
   end
 
   def fitness solution
-    # set weights to NN architecture
+    nn_error solution, @dataset.training
+  end
+
+  def generalization solution
+    nn_error solution, @dataset.generalization
+  end
+
+  def classification solution
     @network.weights = solution
     # retrieve shuffled training data
-    patterns = @dataset.training
+    patterns = @dataset.generalization
 
-    # calculate mse
+    # calculate classification error against precision
+    error = 0.0
+    patterns.each do |pattern|
+      error += precision_classification(pattern.last, @network.output(pattern))
+    end
+    error / patterns.length.to_f
+  end
+
+private
+
+  def nn_error solution, patterns
+    @network.weights = solution
+
+    # calculate mse on data_partition
     error = 0.0
     patterns.each do |pattern|
       error += ((@dataset.target_value(pattern.last) - @network.output(pattern)) ** 2.0)
     end
 
-    mse = error / patterns.length.to_f
-    mse
+    error / patterns.length.to_f
+  end
+
+  def precision_classification target, output
+    difference = (@dataset.target_value(target) - output).abs
+    if difference < @precision
+      1.0
+    else
+      0.0
+    end
   end
 
 end

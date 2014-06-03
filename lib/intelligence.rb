@@ -13,6 +13,7 @@ end
 module Intelligence
   module Sims
     autoload :Simulator,               Utils.relative_path('sims/simulator')
+    autoload :NnSimulator,             Utils.relative_path('sims/nn_simulator')
     autoload :SimulatorConfig,         Utils.relative_path('sims/simulator_config')
     autoload :Simulation,              Utils.relative_path('sims/simulation')
     autoload :Solution,                Utils.relative_path('sims/solution')
