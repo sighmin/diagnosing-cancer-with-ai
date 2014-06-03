@@ -73,5 +73,31 @@ module Intelligence
     def test
       puts "Intelligence gem version #{Intelligence::VERSION}"
     end
+
+    def train
+      File.delete('nn.pstore') if File.exists?('nn.pstore')
+      #FileUtils.touch("nn.pstore")
+      pid = Process.spawn "bundle exec ruby bin/nn_pso"
+      Process.detach pid
+      "<p>Training... this may take a while.</p>"
+    end
+
+    def classify measurements
+      return "<p>Still training...</p>" unless File.exists?('nn.pstore')
+
+      # parse params
+      pattern = measurements.split(',').map{ |m| m.to_f }
+
+      # load up network
+      network = nil
+      store = PStore.new('nn.pstore')
+      store.transaction do
+        network = store[:network]
+        store.commit
+      end
+
+      # return classification
+      "<p>#{network.classify(pattern)}</p>"
+    end
   end
 end

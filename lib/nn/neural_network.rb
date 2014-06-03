@@ -21,6 +21,18 @@ class Intelligence::Nn::NeuralNetwork
     @layers[1].output(input_pattern)
   end
 
+  def classify pattern
+    pattern += [-1] if @layers[0].bias?
+    out = @layers[1].output(pattern)
+    if out <= 0.2
+      "Malignant"
+    elsif out >= 0.8
+      "Benign"
+    else
+      out < 0.5 ? "Not definitive, but more likely Malignant" : "Not definitive, but more likely Benign"
+    end
+  end
+
   def to_s
     string = ""
     longest = layers.map{ |l| l.neurons.length }.max

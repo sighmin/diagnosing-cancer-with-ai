@@ -1,0 +1,28 @@
+#!/usr/bin/env ruby
+
+require 'sinatra'
+require_relative '../lib/intelligence'
+include Intelligence
+
+get '/' do
+  "<h1>Cancer Diagnoser Service</h1><p>Try the following:</p>" + \
+  "<ul><a href='/'><li>GET /</li></a>" + \
+  "<a href='/version'><li>GET /version</li></a>" + \
+  "<a href='/train'><li>GET /train</li></a>" + \
+  "<a href='/classify?measurements=17.99,10.38,122.8,1001,0.1184,0.2776,0.3001,0.1471,0.2419,0.07871,1.095,0.9053,8.589,153.4,0.006399,0.04904,0.05373,0.01587,0.03003,0.006193,25.38,17.33,184.6,2019,0.1622,0.6656,0.7119,0.2654,0.4601,0.1189'><li>GET /classify (should return Malignant)</li></a>" + \
+  "<a href='/classify?measurements=14.64,15.24,95.77,651.9,0.1132,0.1339,0.09966,0.07064,0.2116,0.06346,0.5115,0.7372,3.814,42.76,0.005508,0.04412,0.04436,0.01623,0.02427,0.004841,16.34,18.24,109.4,803.6,0.1277,0.3089,0.2604,0.1397,0.3151,0.08473'><li>GET /classify (should return Benign)</li></a></ul>" + \
+  "<br/><p>CI by Simon van Dyk :P</p>"
+end
+
+get '/version' do
+  "<p>#{Intelligence::VERSION}</p><br/><a href='/'>Back</a>"
+end
+
+get '/train' do
+  "#{Intelligence.train}<br/><a href='/'>Back</a>"
+end
+
+get '/classify' do
+  "#{Intelligence.classify(params[:measurements])}<br/><a href='/'>Back</a>"
+end
+
