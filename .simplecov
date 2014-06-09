@@ -6,7 +6,7 @@ SimpleCov.start do
   add_group 'Algorithms',  'lib/algo'
   add_group 'Mathematics', 'lib/math'
   # Paradigm groupings
-  add_group 'Particle Swarm Optimizers', 'lib/pso'
+  add_group 'Particle Swarm Optimizers', 'lib/si'
   add_group 'Evolutioanry Computation',  'lib/ec'
   add_group 'Neural Networks',           'lib/nn'
   # Simplecov config

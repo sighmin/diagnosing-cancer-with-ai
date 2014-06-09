@@ -76,7 +76,6 @@ module Intelligence
 
     def train
       File.delete('nn.pstore') if File.exists?('nn.pstore')
-      #FileUtils.touch("nn.pstore")
       pid = Process.spawn "bundle exec ruby bin/nn_pso"
       Process.detach pid
       "<p>Training... this may take a while.</p>"
