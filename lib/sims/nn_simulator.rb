@@ -10,6 +10,7 @@ class Intelligence::Sims::NnSimulator < Intelligence::Sims::Simulator
     end
     persist()
     report()
+    @algorithm.attributes_to_persist
   end
 
   def update i

@@ -98,5 +98,36 @@ module Intelligence
       # return classification
       "<p>#{network.classify(pattern)}</p>"
     end
+
+    def train_for_cancer
+      simulator = Intelligence::Sims::NnSimulator.new do
+        simulation type: :simulation, runs: 1, resolution: 1
+        algorithm  type: :pso, iterations: 10, population: 35, dimensions: 225, domain: (-0.5..0.5), vdomain: (-0.7..0.7)
+        problem    type: :nn_training_problem,
+          objective: :minimization,
+          dataset: {
+            file: 'data/breast-cancer.csv',
+            training: 0.64
+          },
+          neural_network: {
+            layers: [{
+              size: 30,
+              bias: true,
+              function: nil
+            },{
+              size: 7,
+              bias: true,
+              function: :sigmoid
+            },{
+              size: 1,
+              bias: false,
+              function: :sigmoid
+            }]
+          },
+          precision: 0.2
+      end
+
+      simulator.run
+    end
   end
 end
