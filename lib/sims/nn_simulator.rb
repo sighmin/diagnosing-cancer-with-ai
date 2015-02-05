@@ -31,6 +31,7 @@ class Intelligence::Sims::NnSimulator < Intelligence::Sims::Simulator
     puts '*** '.magenta + 'Simulator complete'.blue
     puts 'Solution: ' + @algorithm.best_solution_to_print.green
     puts 'Fitness:  ' + @algorithm.best_fitness_to_print.green
+    puts 'Weights:  ' + @algorithm.best_weights_to_print.green
   end
 
   def measurements
