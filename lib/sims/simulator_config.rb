@@ -4,8 +4,8 @@ class Intelligence::Sims::SimulatorConfig < Hash
   def check_class type
     return nil unless type
     namespace = "Intelligence::"
-    ["#{namespace}#{type.to_s.camelize}",
-      "#{namespace}Sims::#{type.to_s.camelize}",
+    ["#{namespace}Sims::#{type.to_s.camelize}",
+      "#{namespace}#{type.to_s.camelize}",
       "#{namespace}Sims::Problems::#{type.to_s.camelize}",
       "#{namespace}Algo::#{type.to_s.camelize}",
       "#{namespace}Pso::#{type.to_s.camelize}",
@@ -13,7 +13,8 @@ class Intelligence::Sims::SimulatorConfig < Hash
       "#{namespace}Nn::#{type.to_s.camelize}",
     ].each do |klass|
       begin
-        return Object.const_get klass
+        found_klass = Object.const_get klass
+        return found_klass
       rescue NameError
       end
     end
