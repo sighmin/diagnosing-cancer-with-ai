@@ -102,7 +102,7 @@ module Intelligence
     def train_for_cancer
       simulator = Sims::NnSimulator.new do
         simulation type: :simulation, runs: 1, resolution: 1
-        algorithm  type: :pso, iterations: 10, population: 35, dimensions: 225, domain: (-0.5..0.5), vdomain: (-0.7..0.7)
+        algorithm  type: :pso, iterations: 3, population: 15, dimensions: 225, domain: (-0.5..0.5), vdomain: (-0.7..0.7)
         problem    type: :nn_training_problem,
           objective: :minimization,
           dataset: {
