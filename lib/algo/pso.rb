@@ -1,4 +1,6 @@
 class Intelligence::Algo::Pso < Intelligence::Algo::Algorithm
+  @@best_classification = 0
+  @@best_weights = nil
 
   def initialize options
     @iterations = options[:iterations] || 1000
@@ -43,6 +45,13 @@ class Intelligence::Algo::Pso < Intelligence::Algo::Algorithm
     if candidate.fitness < @best_solution.fitness
       @best_solution = candidate.dup
     end
+
+    # Also update best_weights
+    best_solution_classification = @problem.classification(@best_solution.position)
+    if best_solution_classification > @@best_classification
+      @@best_classification = best_solution_classification
+      @@best_weights = @best_solution.position
+    end
   end
 
   def best_fitness_to_print
@@ -51,6 +60,10 @@ class Intelligence::Algo::Pso < Intelligence::Algo::Algorithm
 
   def best_solution_to_print
     @best_solution.position.to_s
+  end
+
+  def best_weights_to_print
+    @@best_weights.to_s
   end
 
   def best_fitness
