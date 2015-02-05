@@ -81,4 +81,8 @@ class Intelligence::Algo::Pso < Intelligence::Algo::Algorithm
   def measurements
     [ best_fitness, best_generalization, best_classification ]
   end
+
+  def attributes_to_persist
+    [ @@best_classification, @@best_weights ]
+  end
 end
