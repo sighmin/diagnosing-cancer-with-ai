@@ -41,13 +41,15 @@ class Intelligence::Sims::NnSimulator < Intelligence::Sims::Simulator
   end
 
   def persist
-    store = PStore.new('nn.pstore')
-    store.transaction do
-      store[:training]       = @best[0]
-      store[:generalization] = @best[1]
-      store[:classification] = @best[2]
-      store[:network]        = @best[3]
-      store.commit
+    if defined?(PStore)
+      store = PStore.new('nn.pstore')
+      store.transaction do
+        store[:training]       = @best[0]
+        store[:generalization] = @best[1]
+        store[:classification] = @best[2]
+        store[:network]        = @best[3]
+        store.commit
+      end
     end
   end
 

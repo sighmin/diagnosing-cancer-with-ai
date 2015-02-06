@@ -53,21 +53,25 @@ class Intelligence::Nn::NeuralNetwork
   end
 
   def to_file filepath
-    store = PStore.new(filepath)
-    store.transaction do
-      store[:neural_network] = self
-      store.commit
+    if defined?(PStore)
+      store = PStore.new(filepath)
+      store.transaction do
+        store[:neural_network] = self
+        store.commit
+      end
     end
   end
 
   def self.from_file filepath
-    nn = nil
-    store = PStore.new(filepath)
-    store.transaction do
-      nn = store[:neural_network]
-      store.commit
+    if defined?(PStore)
+      nn = nil
+      store = PStore.new(filepath)
+      store.transaction do
+        nn = store[:neural_network]
+        store.commit
+      end
+      nn
     end
-    nn
   end
 
 end
