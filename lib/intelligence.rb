@@ -1,8 +1,8 @@
 require 'intelligence/version'
-require 'pry'
+#require 'pry'
 require 'colorize'
 require 'active_support/all'
-require 'pstore'
+#require 'pstore'
 
 module Utils
   def self.relative_path file
